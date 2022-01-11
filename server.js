@@ -16,11 +16,12 @@ app.use(bodyParser.json());
 // cors middleware
 app.use(cors());
 
+// api/ middleware
+app.use("/api", apiRouter);
+
 // error handler
 app.use(errorHandler());
 
-// api/ middleware
-app.use("/api", apiRouter);
 
 // PORT
 const port = process.env.PORT || 3000;

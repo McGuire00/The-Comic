@@ -1,5 +1,10 @@
 const express = require("express");
 
-const router = express.Router();
+const artistRouter = require("./artists")
 
-module.exports = router
+const apiRouter = express.Router();
+
+// api/artists/ middleware
+apiRouter.use("/artists", artistRouter);
+
+module.exports = apiRouter

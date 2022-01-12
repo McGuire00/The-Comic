@@ -6,6 +6,21 @@ const db = new sqlite3.Database(databaseConnection);
 
 const issuesRouter = express.Router({ mergeParams: true });
 
+issuesRouter.param("issueId", (req, res, next, issueId) => {
+  const sql = "SELECT * FROM Issue WHERE Issue.id = $issueId";
+  const values = { $issueId: issueId };
+
+  db.get(sql, values, (errro, issue) => {
+    if (error) {
+      next(error);
+    } else if (issue) {
+      next();
+    } else {
+      res.sendStatus(400);
+    }
+  });
+});
+
 issuesRouter.get("/", (req, res, next) => {
   const sql = `SELECT * FROM Issue WHERE Issue.series_id = $seriesId`;
   const values = { $seriesId: req.params.seriesId };
@@ -22,7 +37,7 @@ issuesRouter.post("/", (req, res, next) => {
   const name = req.body.issue.name;
   const issueNumber = req.body.issue.issueNumber;
   const publicationDate = req.body.issue.publicationDate;
-  
+
   const artistId = req.body.issue.artistId;
   const artistSql = "SELECT * FROM Artist WHERE Artist.id = $artistId";
   const artistValues = {

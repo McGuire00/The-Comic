@@ -119,6 +119,8 @@ issuesRouter.post("/", (req, res, next) => {
 //   });
 // });
 
+// https://github.com/rifac77/X-press-Publishing/blob/master/api/issues.js
+
 issuesRouter.put("/:issueId", (req, res, next) => {
   const name = req.body.issue.name;
   const issueNumber = req.body.issue.issueNumber;
@@ -183,5 +185,21 @@ issuesRouter.put("/:issueId", (req, res, next) => {
 //     }
 //   });
 // });
+
+issuesRouter.delete("/:issueId", (req, res, next) => {
+  db.run(
+    "DELETE FROM Issue WHERE Issue.id = $issueId;",
+    {
+      $issueId: req.params.issueId,
+    },
+    (err) => {
+      if (err) {
+        next(err);
+      } else {
+        res.sendStatus(204);
+      }
+    }
+  );
+});
 
 module.exports = issuesRouter;

@@ -8,6 +8,11 @@ The X-Press Publishing internal tool allows users to:
 * Create, view, update, and delete comic book series
 * Create, view, update, and delete issues of a specific comic book series
 
+## Installing and Running
+* Run "npm install" to install all of the necessary dependencies to run application
+* When the previous step is finished, run "npm start" to start the application.
+* Drag/open index.hmtl in browser.
+
 ### Route Paths and Functionality
 
 **/api/artists**

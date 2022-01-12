@@ -2,8 +2,6 @@
 
 ## Project Overview
 
-This project is for a mock comic book store. It features a complete API using Express.js and SQLite for internal management.
-
 The X-Press Publishing internal tool allows users to:
 
 * Create, view, and update artists

@@ -77,4 +77,45 @@ issuesRouter.post("/", (req, res, next) => {
   });
 });
 
+issuesRouter.put("/:issueId", (req, res, next) => {
+  const name = req.body.issue.name;
+  const issueNumber = req.body.issue.issueNumber;
+  const publicationDate = req.body.issue.publicationDate;
+  const artistId = req.body.issue.artistId;
+  const artistSql = "SELECT * FROM Artist WHERE Artist.id = $artistId";
+  const artistValues = { $aritstId: artistId };
+
+  db.get(artistSql, artistValues, (error, artist) => {
+    if (error) {
+      next(error);
+    } else {
+      if (!name || !issueNumber || !publicationDate || !artist) {
+        return res.sendStatus(400);
+      }
+      const sql =
+        "UPDATE Issue SET name = $name, issue_number = $issueNumber, publication_date = $publicationDate, artist_id = $artistId WHERE Issue.id = $issueId";
+      const values = {
+        $name: name,
+        $issueNumber: issueNumber,
+        $publicationDate: publicationDate,
+        $artistId: artistId,
+        $issueId: req.params.issueId,
+      };
+
+      db.run(sql, values, function (error) {
+        if (error) {
+          next(error);
+        } else {
+          db.get(
+            `SELECT * FROM Issue WHERE Issue.id = ${req.params.issueId}`,
+            (error, issue) => {
+              res.status(200).json({ issue: issue });
+            }
+          );
+        }
+      });
+    }
+  });
+});
+
 module.exports = issuesRouter;

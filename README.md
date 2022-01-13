@@ -3,6 +3,7 @@
 ## Project Overview
 ![alt text](https://github.com/McGuire00/The-Comic/blob/main/screenshots/Image1.png)
 ![alt text](https://github.com/McGuire00/The-Comic/blob/main/screenshots/Image2.png)
+![alt text](https://github.com/McGuire00/The-Comic/blob/main/screenshots/Image3.png)
 
 The X-Press Publishing internal tool allows users to:
 

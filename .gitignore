@@ -1,1 +1,3 @@
 node_modules
+database.sqlite3
+/test/test.sqlite3
